@@ -33,7 +33,7 @@ This module depends on populating `var.policy_name` and `var.policy_category` to
 
 ```hcl
 module allowed_regions {
-  source              = "azurenoops/overlays-policy/azurerm//modules/policyDefinition"
+  source              = "POps-Rox/tf-az-overlays-policy/azurerm//modules/policyDefinition"
   version             = "x.x.x"
   policy_def_name     = "allowed_regions"
   display_name        = "Allow resources only in allowed regions"
@@ -52,7 +52,7 @@ Dynamically create a policy set based on multiple custom or built-in policy defi
 
 ```hcl
 module platform_baseline_initiative {
-  source                  = "azurenoops/overlays-policy/azurerm//modules/policyinitiative"
+  source                  = "POps-Rox/tf-az-overlays-policy/azurerm//modules/policyinitiative"
   version                 = "x.x.x"
   initiative_name         = "platform_baseline_initiative"
   initiative_display_name = "[Platform]: Baseline Policy Set"
@@ -73,7 +73,7 @@ module platform_baseline_initiative {
 
 ```hcl
 module org_mg_whitelist_regions {
-  source            = "azurenoops/overlays-policy/azurerm//modules/policyDefAssignment"
+  source            = "POps-Rox/tf-az-overlays-policy/azurerm//modules/policyDefAssignment"
   version           = "x.x.x"
   definition        = module.whitelist_regions.definition
   assignment_scope  = data.azurerm_management_group.root.id
@@ -95,7 +95,7 @@ module org_mg_whitelist_regions {
 
 ```hcl
 module org_mg_platform_diagnostics_initiative {
-  source                  = "azurenoops/overlays-policy/azurerm//modules/policySetAssignment"
+  source                  = "POps-Rox/tf-az-overlays-policy/azurerm//modules/policySetAssignment"
   version                 = "x.x.x"
   initiative              = module.platform_diagnostics_initiative.initiative
   assignment_scope        = data.azurerm_management_group.root.id
@@ -133,7 +133,7 @@ Use the exemption module in favour of `not_scopes` to create an auditable time-s
 
 ```hcl
 module exemption_team_a_mg_deny_nic_public_ip {
-  source               = "azurenoops/overlays-policy/azurerm//modules/policyExemption"
+  source               = "POps-Rox/tf-az-overlays-policy/azurerm//modules/policyExemption"
   version              = "x.x.x"
   name                 = "Deny NIC Public IP Exemption"
   display_name         = "Exempted while testing"
