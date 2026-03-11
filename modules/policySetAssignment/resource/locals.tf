@@ -33,7 +33,7 @@ locals {
   assignment_location = length(local.identity_type) > 0 ? var.assignment_location : null
 
   # evaluate remediation scope from resource identifier
-   resource_discovery_mode = var.re_evaluate_compliance == true ? "ReEvaluateCompliance" : "ExistingNonCompliant"
+  resource_discovery_mode = var.re_evaluate_compliance == true ? "ReEvaluateCompliance" : "ExistingNonCompliant"
   remediation_scope       = try(coalesce(var.remediation_scope, var.assignment_scope), "")
   remediate = try({
     resource = length(split("/", local.remediation_scope)) >= 6 ? 1 : 0,

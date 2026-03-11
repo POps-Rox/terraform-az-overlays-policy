@@ -39,7 +39,7 @@ locals {
   resource_discovery_mode = var.re_evaluate_compliance == true ? "ReEvaluateCompliance" : "ExistingNonCompliant"
   remediation_scope       = try(coalesce(var.remediation_scope, var.assignment_scope), "")
   remediate = try({
-    rg       = length(regexall("(\\/managementGroups\\/)", local.remediation_scope)) < 1 ? length(split("/", local.remediation_scope)) == 5 ? 1 : 0 : 0
+    rg = length(regexall("(\\/managementGroups\\/)", local.remediation_scope)) < 1 ? length(split("/", local.remediation_scope)) == 5 ? 1 : 0 : 0
   })
 
   # evaluate assignment outputs

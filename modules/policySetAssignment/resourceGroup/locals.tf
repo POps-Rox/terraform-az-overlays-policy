@@ -33,10 +33,10 @@ locals {
   assignment_location = length(local.identity_type) > 0 ? var.assignment_location : null
 
   # evaluate remediation scope from resource identifier
-   resource_discovery_mode = var.re_evaluate_compliance == true ? "ReEvaluateCompliance" : "ExistingNonCompliant"
+  resource_discovery_mode = var.re_evaluate_compliance == true ? "ReEvaluateCompliance" : "ExistingNonCompliant"
   remediation_scope       = try(coalesce(var.remediation_scope, var.assignment_scope), "")
   remediate = try({
-    rg       = length(regexall("(\\/managementGroups\\/)", local.remediation_scope)) < 1 ? length(split("/", local.remediation_scope)) == 5 ? 1 : 0 : 0    
+    rg = length(regexall("(\\/managementGroups\\/)", local.remediation_scope)) < 1 ? length(split("/", local.remediation_scope)) == 5 ? 1 : 0 : 0
   })
 
   # retrieve definition references & create a remediation task for policies with DeployIfNotExists and Modify effects

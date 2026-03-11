@@ -36,7 +36,7 @@ locals {
   resource_discovery_mode = var.re_evaluate_compliance == true ? "ReEvaluateCompliance" : "ExistingNonCompliant"
   remediation_scope       = try(coalesce(var.remediation_scope, var.assignment_scope), "")
   remediate = try({
-    sub      = length(split("/", local.remediation_scope)) == 3 ? 1 : 0    
+    sub = length(split("/", local.remediation_scope)) == 3 ? 1 : 0
   })
 
   # retrieve definition references & create a remediation task for policies with DeployIfNotExists and Modify effects
