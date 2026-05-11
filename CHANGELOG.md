@@ -1,6 +1,26 @@
 # Changelog
 
-## [Unreleased](https://github.com/Azure/terraform-verified-module/tree/HEAD)
+## [Unreleased](https://github.com/POps-Rox/terraform-az-overlays-policy/tree/HEAD)
+
+## [v2.0.0] - 2026-05-11
+
+### Changed
+
+- **BREAKING**: Bumped `azurerm` provider to `~> 4.20` (was `~> 3.116`) in all 14 submodule `versions.tf` files and all 4 examples.
+- **BREAKING**: Raised Terraform `required_version` to `>= 1.10` (was previously unset on every submodule and on three of four examples).
+- Declared `azapi ~> 2.0` in every `versions.tf` for fleet alignment.
+- `examples/definition_set_assignment/versions.tf`: explicitly declared `azuread ~> 3.0` (the example uses `provider "azuread" {}` but never declared it in `required_providers`). Removed the 4.x-incompatible `skip_provider_registration = true` argument from the `azurerm` provider block (replacement is `resource_provider_registrations`; leaving unset preserves the safe default).
+- Added `VERSION` file at `2.0.0`.
+
+### Fixed (pre-existing latent bugs surfaced by the validation gate)
+
+- `modules/policySetAssignment/resourceGroup/main.tf`: fixed `local.local.definition_reference.rg` → `local.definition_reference.rg` typo on line 73 (the sibling `subscription`, `managementGroup`, and `resource` submodules already had the correct `local.definition_reference.<scope>` form). The block was unreachable while the typo was present.
+
+### Migration notes
+
+- Consumers must set `ARM_SUBSCRIPTION_ID` (or `provider "azurerm" { subscription_id = ... }`) — azurerm 4.x makes this mandatory.
+- The repo's azurerm surface consists of `azurerm_*_policy_assignment`, `azurerm_*_policy_remediation`, `azurerm_*_policy_exemption`, `azurerm_policy_definition`, `azurerm_policy_set_definition`, and `azurerm_role_assignment` — none have 3.x→4.x attribute renames in their actively-used fields.
+
 
 **Merged pull requests:**
 
