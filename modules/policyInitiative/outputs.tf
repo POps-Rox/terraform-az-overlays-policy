@@ -36,7 +36,7 @@ output "initiative" {
     management_group_id         = var.management_group_id
     parameters                  = local.parameters
     metadata                    = jsonencode(local.metadata)
-    policy_definition_reference = azurerm_policy_set_definition.set.policy_definition_reference
+    policy_definition_reference = var.management_group_id != null ? azurerm_management_group_policy_set_definition.set[0].policy_definition_reference : azurerm_policy_set_definition.set[0].policy_definition_reference
     role_definition_ids         = local.all_role_definition_ids
   }
 }
